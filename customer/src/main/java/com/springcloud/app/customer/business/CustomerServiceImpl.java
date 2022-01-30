@@ -21,7 +21,7 @@ public record CustomerServiceImpl(
         customer.setLastname(registerDTO.getLastname());
         customerRepository.save(customer);
         FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
-                "http://localhost:8081/api/v1/fraud-check/{customerId}",
+                "http://FRAUD/api/v1/fraud-check/{customerId}",
                 FraudCheckResponse.class,
                 customer.getId()
         );
