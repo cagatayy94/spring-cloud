@@ -1,7 +1,7 @@
 package com.springcloud.app.fraud.controller;
 
 import com.springcloud.app.fraud.business.FraudCheckService;
-import com.springcloud.app.fraud.entities.FraudCheckResponse;
+import com.springcloud.clients.fraud.FraudCheckResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

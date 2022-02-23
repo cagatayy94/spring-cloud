@@ -1,4 +1,4 @@
-package com.springcloud.app.customer.entities;
+package com.springcloud.clients.fraud;
 
 public record FraudCheckResponse(Boolean isFraudster) {
 }
