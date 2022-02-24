@@ -5,14 +5,15 @@ import com.springcloud.app.customer.entities.Customer;
 import com.springcloud.app.customer.entities.dtos.CustomerRegisterDTO;
 import com.springcloud.clients.fraud.FraudCheckResponse;
 import com.springcloud.clients.fraud.FraudClient;
+import com.springcloud.clients.notification.NotificationClient;
+import com.springcloud.clients.notification.NotificationResponse;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public record CustomerServiceImpl(
         CustomerRepository customerRepository,
-        RestTemplate restTemplate,
-        FraudClient fraudClient
+        FraudClient fraudClient,
+        NotificationClient notificationClient
 ) implements CustomerService {
 
     @Override
@@ -28,5 +29,13 @@ public record CustomerServiceImpl(
         if (fraudCheckResponse.isFraudster()){
             throw  new IllegalStateException("fraudster");
         }
+
+        NotificationResponse notificationResponse;
+
+        // todo: make this async
+        do {
+            notificationResponse = notificationClient.sendNotification(customer.getId());
+        }while (!notificationResponse.isSuccess());
+
     }
 }
