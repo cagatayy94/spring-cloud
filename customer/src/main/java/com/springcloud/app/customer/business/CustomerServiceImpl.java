@@ -3,10 +3,10 @@ package com.springcloud.app.customer.business;
 import com.springcloud.app.customer.dataAccess.CustomerRepository;
 import com.springcloud.app.customer.entities.Customer;
 import com.springcloud.app.customer.entities.dtos.CustomerRegisterDTO;
-import com.springcloud.clients.fraud.FraudCheckResponse;
-import com.springcloud.clients.fraud.FraudClient;
-import com.springcloud.clients.notification.NotificationClient;
-import com.springcloud.clients.notification.NotificationResponse;
+import com.springcloud.app.clients.fraud.FraudCheckResponse;
+import com.springcloud.app.clients.fraud.FraudClient;
+import com.springcloud.app.clients.notification.NotificationClient;
+import com.springcloud.app.clients.notification.NotificationResponse;
 import org.springframework.stereotype.Service;
 
 @Service

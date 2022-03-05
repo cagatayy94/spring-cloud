@@ -1,4 +1,4 @@
-package com.springcloud.clients.notification;
+package com.springcloud.app.clients.notification;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
 package com.springcloud.app.notification.controller;
 
 import com.springcloud.app.notification.business.NotificationService;
-import com.springcloud.clients.notification.NotificationResponse;
+import com.springcloud.app.clients.notification.NotificationResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

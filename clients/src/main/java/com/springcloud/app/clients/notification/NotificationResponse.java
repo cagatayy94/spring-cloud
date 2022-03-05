@@ -1,4 +1,4 @@
-package com.springcloud.clients.notification;
+package com.springcloud.app.clients.notification;
 
 public record NotificationResponse(Boolean isSuccess) {
 }
