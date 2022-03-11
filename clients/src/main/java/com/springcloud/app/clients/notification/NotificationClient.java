@@ -9,5 +9,5 @@ public interface NotificationClient {
     @GetMapping(
         path = "api/v1/send-notification/{customerId}"
     )
-    NotificationResponse sendNotification(@PathVariable("customerId") Integer customerId);
+    NotificationRequest sendNotification(@PathVariable("customerId") Integer customerId);
 }

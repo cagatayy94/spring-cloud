@@ -6,7 +6,7 @@ import com.springcloud.app.customer.entities.dtos.CustomerRegisterDTO;
 import com.springcloud.app.clients.fraud.FraudCheckResponse;
 import com.springcloud.app.clients.fraud.FraudClient;
 import com.springcloud.app.clients.notification.NotificationClient;
-import com.springcloud.app.clients.notification.NotificationResponse;
+import com.springcloud.app.clients.notification.NotificationRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,12 +30,12 @@ public record CustomerServiceImpl(
             throw  new IllegalStateException("fraudster");
         }
 
-        NotificationResponse notificationResponse;
+        NotificationRequest notificationRequest;
 
         // todo: make this async
         do {
-            notificationResponse = notificationClient.sendNotification(customer.getId());
-        }while (!notificationResponse.isSuccess());
+            notificationRequest = notificationClient.sendNotification(customer.getId());
+        }while (!notificationRequest.isSuccess());
 
     }
 }
