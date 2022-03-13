@@ -23,7 +23,9 @@ public class NotificationApplication {
 
     /*
     @Bean
-    CommandLineRunner commandLineRunner(RabbitMqMessageProducer producer, NotificationConfig notificationConfig){
+    CommandLineRunner commandLineRunner(
+    RabbitMqMessageProducer producer,
+    NotificationConfig notificationConfig){
         return args -> {
             producer.publish(
                     new Person("çaça", 25),

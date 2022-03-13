@@ -13,6 +13,6 @@ public record NotificationController(NotificationService notificationService) {
     public NotificationRequest sendNotification(@PathVariable("customerId") Integer customerId){
         Boolean result = notificationService.sendNotification(customerId);
         log.info("send notification for customer {}", customerId);
-        return new NotificationRequest(result);
+        return new NotificationRequest(1,"caca", "selamın hello");
     }
 }
