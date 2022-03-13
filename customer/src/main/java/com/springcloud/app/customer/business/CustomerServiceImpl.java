@@ -1,11 +1,11 @@
 package com.springcloud.app.customer.business;
 
+import com.springcloud.app.amqp.RabbitMqMessageProducer;
 import com.springcloud.app.customer.dataAccess.CustomerRepository;
 import com.springcloud.app.customer.entities.Customer;
 import com.springcloud.app.customer.entities.dtos.CustomerRegisterDTO;
 import com.springcloud.app.clients.fraud.FraudCheckResponse;
 import com.springcloud.app.clients.fraud.FraudClient;
-import com.springcloud.app.clients.notification.NotificationClient;
 import com.springcloud.app.clients.notification.NotificationRequest;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public record CustomerServiceImpl(
         CustomerRepository customerRepository,
         FraudClient fraudClient,
-        NotificationClient notificationClient
+        RabbitMqMessageProducer rabbitMqMessageProducer
 ) implements CustomerService {
 
     @Override
@@ -30,12 +30,15 @@ public record CustomerServiceImpl(
             throw  new IllegalStateException("fraudster");
         }
 
-        NotificationRequest notificationRequest;
+        NotificationRequest notificationRequest = new NotificationRequest(
+                customer.getId(),
+                customer.getFirstName(),
+                "Merhaba "+customer.getFirstName()+"hosgeldin"
+        );
 
-        // todo: make this async
-        do {
-            notificationRequest = notificationClient.sendNotification(customer.getId());
-        }while (!notificationRequest.isSuccess());
-
+        rabbitMqMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key");
     }
 }
