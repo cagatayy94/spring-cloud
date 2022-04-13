@@ -40,6 +40,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - rabbitmq
   eureka-server:
     image: cagatayy94/eureka-server:latest
     container_name: eureka-server
@@ -73,15 +75,31 @@ services:
     networks:
       - spring
       - postgres
+      - rabbitmq
     depends_on:
       - zipkin
       - eureka-server
       - rabbitmq
+  fraud:
+    image: cagatayy94/fraud:latest
+    container_name: fraud
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
 
 networks:
   postgres:
     driver: bridge
   spring:
+    driver: bridge
+  rabbitmq:
     driver: bridge
 
 volumes:
