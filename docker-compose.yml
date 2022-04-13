@@ -79,7 +79,6 @@ services:
     depends_on:
       - zipkin
       - eureka-server
-      - rabbitmq
   fraud:
     image: cagatayy94/fraud:latest
     container_name: fraud
@@ -89,6 +88,20 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+  notification:
+    image: cagatayy94/notification:latest
+    container_name: notification
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - rabbitmq
       - postgres
     depends_on:
       - zipkin
