@@ -63,6 +63,20 @@ services:
     depends_on:
       - zipkin
       - eureka-server
+  customer:
+    image: cagatayy94/customer:latest
+    container_name: customer
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+      - rabbitmq
 
 networks:
   postgres:
