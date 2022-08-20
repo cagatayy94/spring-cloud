@@ -1,4 +1,3 @@
-
 # Spring Cloud
 
 Spring Cloud Micro Services Architecture
@@ -56,3 +55,7 @@ Json Body
 | `lastname` | `string` | **Required**. Surname of customer. |
 | `email` | `string` | **Required**. Email of customer.   |
 
+
+# Distributed tracing
+
+You can track all requests via http://localhost:9411/zipkin/
